@@ -14,6 +14,8 @@ int mVperAmp = 185; // Which kind of ACS712 use 185 for 5A Module, 100 for 20A M
 const float peakPump = 0.20; // minimum current at which we are sure that the pump is running.
 // END config Variables
 
+// Variables to be passed from a loop to another
+byte lLevel;
 unsigned long chronoPump, lTime=0;
 
 void setup() {
@@ -54,6 +56,8 @@ void loop() {
     Serial.println(cTime);
     Serial.print("Ampère :");
     Serial.println(cAmpere);
+    Serial.print("lLevel : ");
+    Serial.println(lLevel);
     Serial.print("cLevel : ");
     Serial.println(cLevel);
     Serial.print("L arduino fonctionne depuis ");
@@ -65,6 +69,7 @@ void loop() {
 
 // Preparing next loop
   lTime=cTime; // time of this loop is last time of next loop
+  lLevel=cLevel; // idem for level
   delay(2000);
 }
 
