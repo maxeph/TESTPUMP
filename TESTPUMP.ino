@@ -16,7 +16,8 @@ const float peakPump = 0.20; // minimum current at which we are sure that the pu
 
 // Variables to be passed from a loop to another
 byte lLevel;
-unsigned long chronoPump, lTime=0;
+unsigned long chronoPump, lTime=0; // chrono's
+boolean yellow_alert=false, red_alert=false; // alert flags to make sure that alert actions only occur once
 
 void setup() {
   // Set up of levels id MIGHT need to be reworked
@@ -65,6 +66,42 @@ void loop() {
     Serial.print("La pompe a fonctionné ");
     Serial.println(chronoPump/1000);
   }
+
+
+  switch (cLevel) {
+  case 0:
+    Serial.println("Pas d'eau");
+    // Rien a faire excepté resetter les variables
+    break;
+  case 2:
+    Serial.println("Un peu d'eau");
+    // Rien a faire excepté resetter les variables
+    break;
+  case 5:
+    Serial.println("Moyen d'eau ");
+    // checker que pompe fonctionne. sinon envoie sms. Commencer a envoyer la deuxieme pompe?
+    if (getAmpere() > peakPump) {
+      Serial.println(getAmpere());
+      Serial.println("Pompe fonctionne OK");
+    }
+    else {
+      Serial.println(getAmpere());
+      Serial.println("Pompe fonctionne Pas");
+
+
+    }
+    break;
+  case 9:
+    Serial.println("Attention, Rempli !!!");
+    break;
+  }
+
+
+
+
+
+
+
 
 
 // Preparing next loop
