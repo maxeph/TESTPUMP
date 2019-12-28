@@ -8,7 +8,7 @@ byte empt=0,low,med,hi;
 // START config Variables (pins, type of sensors, etc)
 // pins
 const int currentPin = A0; // which pin for ACS712
-int currentPin = nblevels+2
+int relayPin = nblevels+2;
 //config
 int mVperAmp = 185; // Which kind of ACS712 use 185 for 5A Module, 100 for 20A Module, 66 for 30A Module
 const float peakPump = 0.20; // minimum current at which we are sure that the pump is running.
@@ -57,7 +57,7 @@ void loop() {
     Serial.print("cLevel : ");
     Serial.println(cLevel);
     Serial.print("L arduino fonctionne depuis ");
-    Serial.println(milli()/1000);
+    Serial.println(cTime/1000);
     Serial.print("La pompe a fonctionné ");
     Serial.println(chronoPump/1000);
   }
