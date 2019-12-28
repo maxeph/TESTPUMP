@@ -80,19 +80,21 @@ void loop() {
   case 5:
     Serial.println("Moyen d'eau ");
     // checker que pompe fonctionne. sinon envoie sms. Commencer a envoyer la deuxieme pompe?
-    if (getAmpere() > peakPump) {
-      Serial.println(getAmpere());
-      Serial.println("Pompe fonctionne OK");
-    }
-    else {
-      Serial.println(getAmpere());
-      Serial.println("Pompe fonctionne Pas");
+    if (!yellow_alert) {
+    Serial.println("Envoi sms");
 
+    yellow_alert = true
+    }
 
     }
     break;
   case 9:
     Serial.println("Attention, Rempli !!!");
+    if (!red_alert) {
+    Serial.println("Envoi mega sms");
+
+    red_alert = true
+    }
     break;
   }
 
